@@ -12,14 +12,14 @@ using Newtonsoft.Json.Linq;
 
 namespace MuffaloBot.Commands
 {
-    public class QuoteCommands
+    public class QuoteCommands : BaseCommandModule
     {
         [Command("quotes"), Aliases("quote", "listquotes"), Description("List all the available quote commands.")]
         public async Task ListQuotesAsync(CommandContext ctx)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("Listing all quotes:");
-            JObject data = ctx.Client.GetModule<JsonDataModule>().data;
+            JObject data = ctx.Client.GetExtension<JsonDataModule>().data;
             foreach (var item in data["quotes"])
             {
                 JProperty pair = (JProperty)item;

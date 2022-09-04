@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MuffaloBot.Modules
 {
-    public class LogManagerModule : BaseModule
+    public class LogManagerModule : BaseExtension
     {
         static readonly MethodInfo memberwiseCloneMethod = typeof(DiscordMessage).GetMethod("MemberwiseClone", BindingFlags.NonPublic | BindingFlags.Instance);
         DiscordMessage[] discordMessageCache = new DiscordMessage[1000];
@@ -40,7 +40,7 @@ namespace MuffaloBot.Modules
         {
             return (DiscordMessage)memberwiseCloneMethod.Invoke(message, new object[0]);
         }
-        Task OnReceiveDiscordCreateLog(MessageCreateEventArgs e)
+        Task OnReceiveDiscordCreateLog(DiscordClient c, MessageCreateEventArgs e)
         {
             return PushMessage(e.Message);
         }
@@ -50,7 +50,7 @@ namespace MuffaloBot.Modules
             await Task.Run(() => discordMessageCache[currentIndex = (++currentIndex % discordMessageCache.Length)] = ShallowCopyOf(message)).ConfigureAwait(false);
         }
 
-        async Task OnReceiveDiscordDeleteLog(MessageDeleteEventArgs e)
+        async Task OnReceiveDiscordDeleteLog(DiscordClient c, MessageDeleteEventArgs e)
         {
             if (e.Message.Channel?.Name == "logs" || (e.Message.Author?.IsBot ?? true)) return;
             int ind = -1;
@@ -64,7 +64,7 @@ namespace MuffaloBot.Modules
                 await NotifyDeleteAsync(e.Message, e.Guild);
             }
         }
-        async Task OnReceiveDiscordModifyLog(MessageUpdateEventArgs e)
+        async Task OnReceiveDiscordModifyLog(DiscordClient c, MessageUpdateEventArgs e)
         {
             if (e.Message == null || e.Message.Channel.Name == "logs" || string.IsNullOrEmpty(e.Message.Content) || e.Message.Author.IsBot) return;
             int ind = -1;

@@ -20,7 +20,7 @@ namespace MuffaloBot.Attributes
 
         public string Channel { get; set; }
 
-        public override Task<bool> CanExecute(CommandContext ctx, bool help)
+        public override Task<bool> ExecuteCheckAsync(CommandContext ctx, bool help)
         {
             return Task.FromResult(ctx.Guild == null || ctx.Guild.Name != Guild || ctx.Channel.Name == Channel);
         }

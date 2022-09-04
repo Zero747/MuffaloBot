@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using Microsoft.Extensions.Logging;
 using MuffaloBot.Converters;
 
 namespace MuffaloBot
@@ -15,7 +16,7 @@ namespace MuffaloBot
     class Program
     {
         public DiscordClient client;
-        public CommandsNextModule commandsNext;
+        public CommandsNextExtension commandsNext;
         static Program _i;
         public static Program instance
         {
@@ -29,22 +30,23 @@ namespace MuffaloBot
         {
             client = new DiscordClient(new DiscordConfiguration()
             {
-                UseInternalLogHandler = true,
+                //UseInternalLogHandler = true,
 #if DEBUG
-                LogLevel = LogLevel.Debug,
+                Minimum​Log​Level = LogLevel.Debug,
 #else
-                LogLevel = LogLevel.Info,
+                Minimum​Log​Level = LogLevel.Information,
 #endif
                 TokenType = TokenType.Bot,
                 Token = AuthResources.BotToken // Create a new AuthResources resource file
             });
             commandsNext = client.UseCommandsNext(new CommandsNextConfiguration()
             {
-                StringPrefix = "!",
-                EnableDefaultHelp = false
+                StringPrefixes = new[] { "!" },
+                EnableMentionPrefix = true,
+                EnableDefaultHelp = true
             });
             commandsNext.RegisterCommands(Assembly.GetExecutingAssembly());
-            client.DebugLogger.LogMessage(LogLevel.Info, "MuffaloBot", $"Registered {commandsNext.RegisteredCommands.Count} commands", DateTime.Now);
+            client.Logger.Log(LogLevel.Information, $"MuffaloBot Registered {commandsNext.RegisteredCommands.Count} commands", DateTime.Now);
             commandsNext.SetHelpFormatter<MuffaloBotHelpFormatter>();
             LoadModules();
         }
@@ -52,16 +54,16 @@ namespace MuffaloBot
         {
             foreach (Type t in Assembly.GetExecutingAssembly().GetTypes())
             {
-                if (typeof(BaseModule).IsAssignableFrom(t))
+                if (typeof(BaseExtension).IsAssignableFrom(t))
                 {
                     try
                     {
-                        client.AddModule((BaseModule)Activator.CreateInstance(t));
-                        client.DebugLogger.LogMessage(LogLevel.Info, "MuffaloBot", $"Loaded module {t.FullName}", DateTime.Now);
+                        client.AddExtension((BaseExtension)Activator.CreateInstance(t));
+                        client.Logger.Log(LogLevel.Information, $"MuffaloBot Loaded module {t.FullName}", DateTime.Now);
                     }
                     catch (Exception e)
                     {
-                        client.DebugLogger.LogMessage(LogLevel.Error, "MuffaloBot", $"Could not load module {t.FullName}: {e}", DateTime.Now);
+                        client.Logger.Log(LogLevel.Error, $"MuffaloBot Could not load module {t.FullName}: {e}", DateTime.Now);
                     }
                 }
             }

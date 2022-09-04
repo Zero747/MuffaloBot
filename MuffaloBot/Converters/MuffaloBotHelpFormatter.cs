@@ -14,12 +14,12 @@ namespace MuffaloBot.Converters
     /// <summary>
     /// Help formatter based off of the default help formatter
     /// </summary>
-    public class MuffaloBotHelpFormatter : IHelpFormatter
+    public class MuffaloBotHelpFormatter : BaseHelpFormatter
     {
         /// <summary>
         /// Creates a new default help formatter.
         /// </summary>
-        public MuffaloBotHelpFormatter()
+        public MuffaloBotHelpFormatter(CommandContext ctx) : base(ctx)
         {
             _embed = new DiscordEmbedBuilder();
             _name = null;
@@ -32,9 +32,17 @@ namespace MuffaloBot.Converters
         /// </summary>
         /// <param name="name">Name of the command for which the help is displayed.</param>
         /// <returns>Current formatter.</returns>
-        public IHelpFormatter WithCommandName(string name)
+        public BaseHelpFormatter WithCommandName(string name)
         {
             _name = name;
+            return this;
+        }
+
+        public override BaseHelpFormatter WithCommand(Command command)
+        {
+            // _embed.AddField(command.Name, command.Description);            
+            // _strBuilder.AppendLine($"{command.Name} - {command.Description}");
+            _name = command.Name;
             return this;
         }
 
@@ -43,7 +51,7 @@ namespace MuffaloBot.Converters
         /// </summary>
         /// <param name="description">Description of the command for which help is displayed.</param>
         /// <returns>Current formatter.</returns>
-        public IHelpFormatter WithDescription(string description)
+        public BaseHelpFormatter WithDescription(string description)
         {
             _desc = description;
             return this;
@@ -54,7 +62,7 @@ namespace MuffaloBot.Converters
         /// </summary>
         /// <param name="aliases">Aliases of the command for which help is displayed.</param>
         /// <returns>Current formatter.</returns>
-        public IHelpFormatter WithAliases(IEnumerable<string> aliases)
+        public BaseHelpFormatter WithAliases(IEnumerable<string> aliases)
         {
             if (aliases.Any())
             {
@@ -68,7 +76,7 @@ namespace MuffaloBot.Converters
         /// </summary>
         /// <param name="arguments">Arguments that the command for which help is displayed takes.</param>
         /// <returns>Current formatter.</returns>
-        public IHelpFormatter WithArguments(IEnumerable<CommandArgument> arguments)
+        public BaseHelpFormatter WithArguments(IEnumerable<CommandArgument> arguments)
         {
             if (arguments.Any<CommandArgument>())
             {
@@ -96,7 +104,7 @@ namespace MuffaloBot.Converters
                     {
                         stringBuilder.Append(">: ");
                     }
-                    stringBuilder.Append(commandArgument.Type.ToUserFriendlyName()).Append("`: ");
+                    stringBuilder.Append(commandArgument.Type.Name).Append("`: ");
                     stringBuilder.Append(string.IsNullOrWhiteSpace(commandArgument.Description) ? "No description provided." : commandArgument.Description);
                     if (commandArgument.IsOptional)
                     {
@@ -113,7 +121,7 @@ namespace MuffaloBot.Converters
         /// When the current command is a group, this sets it as executable.
         /// </summary>
         /// <returns>Current formatter.</returns>
-        public IHelpFormatter WithGroupExecutable()
+        public BaseHelpFormatter WithGroupExecutable()
         {
             _gexec = true;
             return this;
@@ -124,7 +132,7 @@ namespace MuffaloBot.Converters
         /// </summary>
         /// <param name="subcommands">Subcommands of the command for which help is displayed.</param>
         /// <returns>Current formatter.</returns>
-        public IHelpFormatter WithSubcommands(IEnumerable<Command> subcommands)
+        public override BaseHelpFormatter WithSubcommands(IEnumerable<Command> subcommands)
         {
             if (subcommands.Any())
             {
@@ -138,11 +146,11 @@ namespace MuffaloBot.Converters
         /// Construct the help message.
         /// </summary>
         /// <returns>Data for the help message.</returns>
-        public CommandHelpMessage Build()
+        public override CommandHelpMessage Build()
         {
             _embed.Title = "MuffaloBot Help";
             _embed.Color = DiscordColor.Green;
-            string description = "Listing all public commands. Type `!mbhelp <command>` to learn more about a command. Type `!quotes` for all quote commands.";
+            string description = "Listing all public commands. Type `!help <command>` to learn more about a command. Type `!quotes` for all quote commands.";
             if (_name != null)
             {
                 StringBuilder stringBuilder = new StringBuilder();

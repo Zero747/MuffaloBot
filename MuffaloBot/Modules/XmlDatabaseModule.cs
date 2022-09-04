@@ -12,7 +12,7 @@ using System.Xml;
 
 namespace MuffaloBot.Modules
 {
-    class XmlDatabaseModule : BaseModule
+    class XmlDatabaseModule : BaseExtension
     {
         List<KeyValuePair<string, XmlDocument>> database = new List<KeyValuePair<string, XmlDocument>>();
         public XmlDatabaseModule()

@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace MuffaloBot.Modules
 {
-    public class ExceptionHandlerModule : BaseModule
+    public class ExceptionHandlerModule : BaseExtension
     {
-        public async Task HandleClientError(CommandErrorEventArgs e)
+        public async Task HandleClientError(CommandsNextExtension c, CommandErrorEventArgs e)
         {
             if (e.Exception is CommandNotFoundException || e.Exception is UnauthorizedException || e.Exception.Message.StartsWith("Could not convert specified value to given type.")) return;
 
@@ -24,21 +24,23 @@ namespace MuffaloBot.Modules
                 return;
             }
 
-            await HandleClientError(e.Exception, e.Context.Client, "Command " + (e.Command?.Name ?? "unknown"));
+            await HandleClientError(e.Exception, "Command " + (e.Command?.Name ?? "unknown"));
         }
 
-        public Task HandleClientError(ClientErrorEventArgs e)
+        public Task HandleClientError(DiscordClient c, ClientErrorEventArgs e)
         {
-            return HandleClientError(e.Exception, (DiscordClient)e.Client, "Event " + e.EventName);
+            return HandleClientError(e.Exception, "Event " + e.EventName);
         }
-        public async Task HandleClientError(Exception e, DiscordClient client, string action)
+        public async Task HandleClientError(Exception e, string action)
         {
             DiscordEmbedBuilder builder = new DiscordEmbedBuilder();
             builder.WithTitle("Unhandled exception");
             builder.WithDescription($"Action: {action}\n```\n{e.ToString()}```");
             builder.WithColor(DiscordColor.Red);
-            DiscordChannel channel = await client.CreateDmAsync(client.CurrentApplication.Owner);
-            await client.SendMessageAsync(channel, embed: builder.Build());
+            
+            //DiscordChannel channel = await client.CreateDmAsync(client.CurrentApplication.Owner);
+            //await client.SendMessageAsync(channel, embed: builder.Build());
+            //TODO, can't do DmAsync without an associated guild
         }
 
         protected override void Setup(DiscordClient client)

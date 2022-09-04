@@ -10,7 +10,7 @@ using System.Net.Http;
 
 namespace MuffaloBot.Modules
 {
-    public class JsonDataModule : BaseModule
+    public class JsonDataModule : BaseExtension
     {
         public JObject data;
         protected override void Setup(DiscordClient client)
@@ -20,7 +20,7 @@ namespace MuffaloBot.Modules
             client.MessageCreated += HandleQuoteAsync;
         }
 
-        private async Task HandleQuoteAsync(DSharpPlus.EventArgs.MessageCreateEventArgs e)
+        private async Task HandleQuoteAsync(DiscordClient c, DSharpPlus.EventArgs.MessageCreateEventArgs e)
         {
             JToken quote = data["quotes"][e.Message.Content];
             if (quote != null)

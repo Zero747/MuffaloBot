@@ -12,7 +12,7 @@ using System.Xml;
 
 namespace MuffaloBot.Commands
 {
-    public class XPathCommands
+    public class XPathCommands : BaseCommandModule
     {
         [Command("xpath"), Description("Searches the RimWorld Xml database for xml nodes that match the xpath. **Examples:**\n`!xpath Defs/ThingDef[defName=\"Steel\"]/description`\n`!xpath Defs/ThingDef[@Name=\"BuildingBase\"]`\n`!xpath //*`")]
         public async Task XPathCommand(CommandContext ctx)
@@ -20,7 +20,7 @@ namespace MuffaloBot.Commands
             if (string.IsNullOrWhiteSpace(ctx.RawArgumentString)) return;
             try
             {
-                await ctx.RespondAsync(ctx.Client.GetModule<XmlDatabaseModule>().GetSummaryForNodeSelection(ctx.RawArgumentString));
+                await ctx.RespondAsync(ctx.Client.GetExtension<XmlDatabaseModule>().GetSummaryForNodeSelection(ctx.RawArgumentString));
             }
             catch (System.Xml.XPath.XPathException ex)
             {
@@ -36,7 +36,7 @@ namespace MuffaloBot.Commands
                 await ctx.RespondAsync("Invalid name! Only letters, numbers, spaces, underscores or dashes allowed.");
                 return;
             }
-            XmlDatabaseModule xmlDatabase = ctx.Client.GetModule<XmlDatabaseModule>();
+            XmlDatabaseModule xmlDatabase = ctx.Client.GetExtension<XmlDatabaseModule>();
             IEnumerable<KeyValuePair<string, XmlNode>> results =
                 xmlDatabase
                 .SelectNodesByXpath($"Defs/ThingDef[translate(defName,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=\"{itemName.ToLower()}\"]")
@@ -73,7 +73,7 @@ namespace MuffaloBot.Commands
                     if (item.Value["stuffProps"] != null)
                     {
                         stringBuilder = new StringBuilder();
-                        DiscordColor color = builder.Color;
+                        DiscordColor color = (DiscordColor)builder.Color;
                         AllStuffPropertiesForThingDef(xmlDatabase, item.Value, stringBuilder, new HashSet<string>(), ref color);
                         builder.Color = color;
                         string result = stringBuilder.ToString();

@@ -23,13 +23,13 @@ namespace MuffaloBot.Commands
     {
         public CommandContext ctx;
     }
-    public class Meta
+    public class Meta : BaseCommandModule
     {
-        [Command("mbhelp")]
-        public Task ShowHelpAsync(CommandContext ctx, params string[] command)
-        {
-            return ctx.CommandsNext.DefaultHelpAsync(ctx, command);
-        }
+        //[Command("mbhelp")]
+        //public Task ShowHelpAsync(CommandContext ctx, params string[] command)
+        //{
+            //return ctx.CommandsNext.DefaultHelpAsync(ctx, command);
+        //}
         [Command("about"), Description("Shows info about the bot.")]
         public Task About(CommandContext ctx)
         {
@@ -54,9 +54,9 @@ This bot account will not have an invite link. It is exclusive to the RimWorld d
         private async Task RunUpdateAsync(CommandContext ctx)
         {
             DiscordMessage message = await ctx.RespondAsync("```\nUpdating... [          ] 0%\n```");
-            await ctx.Client.GetModule<JsonDataModule>().ReloadDataAsync();
+            await ctx.Client.GetExtension<JsonDataModule>().ReloadDataAsync();
             await message.ModifyAsync("```\nUpdating... [████░     ] 42%\n```");
-            await ctx.Client.GetModule<XmlDatabaseModule>().UpdateDatabaseAsync();
+            await ctx.Client.GetExtension<XmlDatabaseModule>().UpdateDatabaseAsync();
             if (DateTime.Now.Millisecond < 500)
             {
                 await message.ModifyAsync("```\nUpdating... [██████████] 99.999999%\n```");
@@ -77,7 +77,7 @@ This bot account will not have an invite link. It is exclusive to the RimWorld d
         [Command("status"), RequireOwner, Hidden]
         public async Task SetStatusAsync(CommandContext ctx, string status)
         {
-            await ctx.Client.UpdateStatusAsync(new DiscordGame(status));
+            await ctx.Client.UpdateStatusAsync(new DiscordActivity(status));
             await ctx.RespondAsync(DiscordEmoji.FromName(ctx.Client, ":ok_hand:").ToString());
         }
         [Command("die"), RequireOwner, Hidden]

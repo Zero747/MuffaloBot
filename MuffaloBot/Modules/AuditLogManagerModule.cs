@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MuffaloBot.Modules
 {
 #if DEBUG
-    class AuditLogManagerModule : BaseModule
+    class AuditLogManagerModule : BaseExtension
     {
         protected override void Setup(DiscordClient client)
         {
@@ -169,15 +169,15 @@ namespace MuffaloBot.Modules
             else if (obj is DiscordOverwrite ov)
             {
                 string result = "";
-                if (ov.Type == "role")
+                if (ov.Type.Equals("role"))
                 {
                     result += $"Role {ToStringHumanReadable(guild.GetRole(ov.Id), guild)}:\n";
                 }
-                else if (ov.Type == "member")
+                else if (ov.Type.Equals("member"))
                 {
                     result += $"Member {ToStringHumanReadable(await guild.GetMemberAsync(ov.Id).ConfigureAwait(false), guild)}";
                 }
-                return $"Allow: {ov.Allow.ToPermissionString()}\nDeny: {ov.Deny.ToPermissionString()}";
+                return $"Allow: {ov.Allowed.ToPermissionString()}\nDeny: {ov.Denied.ToPermissionString()}";
             }
             else if (obj is Permissions perms)
             {

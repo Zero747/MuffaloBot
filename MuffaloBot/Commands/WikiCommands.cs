@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MuffaloBot.Commands
 {
-    public class WikiCommands
+    public class WikiCommands : BaseCommandModule
     {
         const string queryAddress = "http://rimworldwiki.com/api.php?action=query&list=search&format=json&srlimit=5&srprop=size|wordcount|timestamp&srsearch={0}";
 

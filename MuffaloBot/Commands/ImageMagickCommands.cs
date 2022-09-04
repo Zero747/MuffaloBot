@@ -15,7 +15,7 @@ using MuffaloBot.Attributes;
 namespace MuffaloBot.Commands
 {
     [Cooldown(1, 60, CooldownBucketType.User), RequireChannelInGuild("RimWorld", "bot-commands")]
-    public class ImageMagickCommands
+    public class ImageMagickCommands : BaseCommandModule
     {
         enum ImageEditMode
         {
@@ -173,7 +173,9 @@ namespace MuffaloBot.Commands
             {
                 image.Write(stream);
                 stream.Seek(0, SeekOrigin.Begin);
-                await ctx.RespondWithFileAsync(stream, "magic.gif");
+                await new DiscordMessageBuilder()
+                    .WithFiles(new Dictionary<string, Stream>() { { "magic.gif", stream } })
+                    .SendAsync(ctx.Channel);
             }
         }
         async Task DoImageMagickCommandForStillImage(CommandContext ctx, byte[] buffer, ImageEditMode mode)
@@ -226,11 +228,15 @@ namespace MuffaloBot.Commands
                 stream.Seek(0, SeekOrigin.Begin);
                 if (mode == ImageEditMode.JPEG || mode == ImageEditMode.MoreJPEG || mode == ImageEditMode.MostJPEG)
                 {
-                    await ctx.RespondWithFileAsync(stream, "magic.jpeg");
+                    await new DiscordMessageBuilder()
+                    .WithFiles(new Dictionary<string, Stream>() { { "magic.jpeg", stream } })
+                    .SendAsync(ctx.Channel);
                 }
                 else
                 {
-                    await ctx.RespondWithFileAsync(stream, "magic.png");
+                    await new DiscordMessageBuilder()
+                    .WithFiles(new Dictionary<string, Stream>() { { "magic.png", stream } })
+                    .SendAsync(ctx.Channel);
                 }
             }
         }
@@ -248,7 +254,7 @@ namespace MuffaloBot.Commands
                     image.Resize(originalWidth, originalHeight);
                     break;
                 case ImageEditMode.Wave:
-                    image.BackgroundColor = MagickColor.FromRgb(0, 0, 0);
+                    //image.BackgroundColor = MagickColor.FromRgb(0, 0, 0);
                     image.Wave(image.Interpolate, 10.0, 150.0);
                     break;
                 case ImageEditMode.Implode:

@@ -16,7 +16,7 @@ using System.Web;
 
 namespace MuffaloBot.Commands
 {
-    public class SteamWorkshopCommands
+    public class SteamWorkshopCommands : BaseCommandModule
     {
         private const string baseUrl = "https://api.steampowered.com/";
         private const string relativeModPageEndpoint = "ISteamRemoteStorage/GetPublishedFileDetails/v1/";
@@ -108,7 +108,7 @@ namespace MuffaloBot.Commands
                 .AddField("Last Update", DateTimeOffset.FromUnixTimeSeconds(lastUpdated).Date.ToShortDateString(), true)
                 .AddField("Description", cleanDescription)
                 .AddField("Steam API Link", $"steam://url/CommunityFilePage/{mod.PublishedFileId}")
-                .WithThumbnailUrl(user.avatarmedium)
+                .WithThumbnail(user.avatarmedium)
                 .WithImageUrl(mod.Preview_Url)
                 .Build();
 
