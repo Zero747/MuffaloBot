@@ -15,7 +15,7 @@ namespace MuffaloBot.Commands
     public class XPathCommands : BaseCommandModule
     {
         [Command("xpath"), Description("Searches the RimWorld Xml database for xml nodes that match the xpath. **Examples:**\n`!xpath Defs/ThingDef[defName=\"Steel\"]/description`\n`!xpath Defs/ThingDef[@Name=\"BuildingBase\"]`\n`!xpath //*`")]
-        public async Task XPathCommand(CommandContext ctx, string xpath)
+        public async Task XPathCommand(CommandContext ctx, [RemainingText] string xpath = @"")
         {
             if (string.IsNullOrWhiteSpace(xpath)) return;
             try
