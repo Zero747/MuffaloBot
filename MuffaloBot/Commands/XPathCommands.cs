@@ -15,12 +15,12 @@ namespace MuffaloBot.Commands
     public class XPathCommands : BaseCommandModule
     {
         [Command("xpath"), Description("Searches the RimWorld Xml database for xml nodes that match the xpath. **Examples:**\n`!xpath Defs/ThingDef[defName=\"Steel\"]/description`\n`!xpath Defs/ThingDef[@Name=\"BuildingBase\"]`\n`!xpath //*`")]
-        public async Task XPathCommand(CommandContext ctx)
+        public async Task XPathCommand(CommandContext ctx, string xpath)
         {
-            if (string.IsNullOrWhiteSpace(ctx.RawArgumentString)) return;
+            if (string.IsNullOrWhiteSpace(xpath)) return;
             try
             {
-                await ctx.RespondAsync(ctx.Client.GetExtension<XmlDatabaseModule>().GetSummaryForNodeSelection(ctx.RawArgumentString));
+                await ctx.RespondAsync(ctx.Client.GetExtension<XmlDatabaseModule>().GetSummaryForNodeSelection(xpath));
             }
             catch (System.Xml.XPath.XPathException ex)
             {
