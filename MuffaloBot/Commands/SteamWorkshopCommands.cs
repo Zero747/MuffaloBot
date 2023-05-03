@@ -115,7 +115,7 @@ namespace MuffaloBot.Commands
             await ctx.RespondAsync(embed: modEmbed);
         }
 
-        private const string query = baseUrl + "IPublishedFileService/QueryFiles/v1/?key={0}&format=json&numperpage={1}&appid=294100&match_all_tags=1&&excludedtags[]=Scenario&search_text={2}&return_short_description=1&return_metadata=1&query_type={3}\"";
+        private const string query = baseUrl + "IPublishedFileService/QueryFiles/v1/?key={0}&format=json&numperpage={1}&appid=294100&match_all_tags=1&&excludedtags[]=Scenario&search_text={2}&return_short_description=1&return_metadata=1&query_type={3}";
 
         private JObject Query(string content, string key, byte resultsCap = 5)
         {
