@@ -35,7 +35,8 @@
     "!sierra": "https://tenor.com/view/cat-nonsense-anime-catgirl-gif-22850739",
     "!simplemath": "https://cdn.discordapp.com/attachments/1102434597200990268/1102434616910041159/image.png",
     "!commonsense": "https://cdn.discordapp.com/attachments/1102434597200990268/1102435230901608559/unknown.png",
-    "!dragon": "<@175777453363560448>"
+    "!dragon": "<@175777453363560448>",
+    "!workspace": "Consider loading the entire `Data` folder into a workspace so you can search through all Defs at once. Notepad++ or any modern IDE can do this."
 
   }
 }
