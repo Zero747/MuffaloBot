@@ -17,6 +17,7 @@
     "!seriousbusiness": "\"I'm seriously business mod\" - Mehni",
     "!troublepins": "In #troubleshooting, be sure to read the pinned messages or follow this link: https://discord.com/channels/214523379766525963/257987178834034688/909377926733127720",
     "!troubleshooting": "Please proceed to https://discord.com/channels/214523379766525963/1020009037510746212 and go through the post before seeking further assistance.",
+    "!troublemeleeing": "https://media.discordapp.net/attachments/1108729563812462592/1108729564672311378/IMG_7502.gif",
     "!incompatible": "https://media.discordapp.net/attachments/632790371256238120/671190029217038366/CEIAMINCOMPAT.png",
     "!modideas": "Friendly reminder to search for mods in <#218913447788806144> before coming to <#224106027413405696> to suggest them :)",
     "!hellomodder": "Hello modder. I am here to inform you that all mods need to update Harmony and should make Harmony a dependent mod. Also include CE compatibility. RimWorld 1.1 is out. Thanks.",
@@ -30,12 +31,22 @@
     "!ahegao": "https://cdn.discordapp.com/attachments/326892498096095233/1000493929172586608/image0.jpg",
     "!context": "If you are encountering a problem, please provide as much context as possible. Post the error message(s) you are getting, preferably with a HugsLog if available, and show any relevant XML or code.",
     "!bitches": "https://cdn.discordapp.com/attachments/218913447788806144/1032349388414128239/RimWorld_No_Bitches.png",
-    "!code": "https://cdn.discordapp.com/attachments/326892498096095233/1098814683860975626/image.png",
+    "!code": "https://media.discordapp.net/attachments/326892498096095233/1123714754561724496/image.png",
     "!sawah": "<a:RWPatSawah:897930275810603018>",
     "!sierra": "https://tenor.com/view/cat-nonsense-anime-catgirl-gif-22850739",
     "!simplemath": "https://cdn.discordapp.com/attachments/1102434597200990268/1102434616910041159/image.png",
     "!commonsense": "https://cdn.discordapp.com/attachments/1102434597200990268/1102435230901608559/unknown.png",
-    "!dragon": "<@175777453363560448>"
-
+    "!dragon": "<@175777453363560448>",
+    "!aelanna": "https://cdn.discordapp.com/attachments/326892498096095233/1105520815216279682/image.png",
+    "!xml": "https://cdn.discordapp.com/attachments/215496692047413249/1102648293495930940/show-me.png",
+    "!nonu": "👗",
+    "!wtf": "https://cdn.discordapp.com/attachments/214523406727512065/1126627842202021908/image.png",
+    "!bunk": "We inform you that <@534785044321927171> has ping based vision. Pings are not an answer, they are a question, and the answer is **yes**. Have an awesome day!",
+    "!ted": "`!ted` is a command, but no one can decide what it should say.",
+    "!steve": "https://cdn.discordapp.com/attachments/326892498096095233/1106651578783514674/7lkcq0.jpg",
+    "!workspace": "Consider loading the entire `Rimworld` folder into a workspace so you can search through all Defs at once, both vanilla and locally modded. Notepad++, VS Code, or any other modern IDE can do this. Example shown is in VS Code. https://cdn.discordapp.com/attachments/326892498096095233/1105722523519295569/Animation20.gif",
+    "!chatgpt": "Programs such as ChatGPT are language processors and not true AI; they will confidently spew nonsense that only a true expert can tell from fiction, thus they are strongly discouraged when you are trying to learn a new technical skill such as coding or mod-making as they can make it harder to learn how to do things correctly.",
+    "!sequence": "Try to avoid using `PatchOperationSequence` because it can obfuscate errors and make it difficult to figure out what's wrong. You only need it if you are sequencing multiple patches off of a PatchOperationFindMod or PatchOperationConditional, and in the former case if you have enough patches you should consider using LoadFolders.xml instead. Please see https://rimworldwiki.com/wiki/Modding_Tutorials/PatchOperations for more information.",
+    "!performance": "**__Below are links to commonly used Performance Mods__**\n*Current as of July 16, 2023*\n\n`Generic Performance Mods`\n**Dubs Performance Analyzer**\n<https://steamcommunity.com/sharedfiles/filedetails/?id=2038874626>\n\n**Performance Fish**\n<https://github.com/bbradson/Performance-Fish>\n\n**Performance Optimizer**\n<https://steamcommunity.com/sharedfiles/filedetails/?id=2664723367>\n\n**RocketMan**\n<https://steamcommunity.com/sharedfiles/filedetails/?id=2479389928>\n\n`Mods by Owlchemist`\n<https://steamcommunity.com/sharedfiles/filedetails/?id=2920267342>\n\n"
   }
 }
