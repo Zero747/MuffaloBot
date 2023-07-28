@@ -37,7 +37,8 @@ namespace MuffaloBot
                 Minimum​Log​Level = LogLevel.Information,
 #endif
                 TokenType = TokenType.Bot,
-                Token = AuthResources.BotToken // Create a new AuthResources resource file
+                Token = AuthResources.BotToken, // Create a new AuthResources resource file
+                Intents = DiscordIntents.All
             });
             commandsNext = client.UseCommandsNext(new CommandsNextConfiguration()
             {
