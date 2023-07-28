@@ -154,7 +154,7 @@ namespace MuffaloBot.Modules
             embedBuilder.WithColor(DiscordColor.Yellow);
             embedBuilder.WithDescription($"Before```\n{content}```After```\n{afterContent}```");
             embedBuilder.AddField("ID", after.Id.ToString(), true);
-            embedBuilder.AddField("Author ID", after.Author.Id.ToString(), true);
+            embedBuilder.AddField("Author", after.Author.Username, true);
             embedBuilder.AddField("Channel", "#" + after.Channel.Name, true);
             embedBuilder.AddField("Timestamp (UTC)", after.Timestamp.ToUniversalTime().ToString(), true);
             embedBuilder.AddField("Link", after.JumpLink.ToString(), true);
