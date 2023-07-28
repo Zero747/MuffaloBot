@@ -157,7 +157,8 @@ namespace MuffaloBot.Modules
             embedBuilder.AddField("Author ID", after.Author.Id.ToString(), true);
             embedBuilder.AddField("Channel", "#" + after.Channel.Name, true);
             embedBuilder.AddField("Timestamp (UTC)", after.Timestamp.ToUniversalTime().ToString(), true);
-            IReadOnlyList<DiscordAttachment> attachments = after.Attachments;
+            embedBuilder.AddField("Link", after.JumpLink.ToString(), true);
+            IReadOnlyList <DiscordAttachment> attachments = after.Attachments;
             for (int i = 0; i < attachments.Count; i++)
             {
                 embedBuilder.AddField($"Attachment {i + 1}", $"{attachments[i].FileName} ({attachments[i].FileSize}) {attachments[i].Url}", true);
