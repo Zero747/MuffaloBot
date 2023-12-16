@@ -1,6 +1,6 @@
 ﻿{
   "quotes": {
-    "!binary": "```ansi\nHow to binary search\n[0;32m1)[0;90m Test on a new save to see if the issue is easily reproducible. Proceed if it is.\n[0;32m2)[0;90m Remove half of your active mods, ensuring dependencies are still fulfilled.\n[0;32m3)[0;90m Test on a new save (loading an existing save will likely result in numerous unrelated errors).\n[0;32m4a)[0;90m If [0;31merror is [4;90mstill[0;90m present[0;90m, [0;34mrepeat from step [4;90m2[0;90m.\n[0;32m4b)[0;90m If [0;31merror is [4;90mno longer[0;90m present, [0;34mswap to the half you removed in step [4;90m2[0;90m, then repeat from step [4;90m3[0;90m.\n[0;32m5)[0;90m Repeat until you identify the mod(s) causing the issue.\n\nNote: It may not be possible to identify the exact mod or combination of mods that are causing the error, but it should be possible to significantly narrow down the possibilities, allowing for more targeted testing.\n```",
+    "!binary": "comand borkd",
     "!moddingtutorials": "http://rimworldwiki.com/wiki/Modding_Tutorials",
     "!settingupcs": "http://rimworldwiki.com/wiki/Modding_Tutorials/Setting_up_a_solution",
     "!patchoperations": "http://rimworldwiki.com/wiki/Modding_Tutorials/PatchOperations",
