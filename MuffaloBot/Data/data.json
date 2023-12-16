@@ -1,6 +1,5 @@
 ﻿{
   "quotes": {
-    "!binary": "comand borkd",
     "!moddingtutorials": "http://rimworldwiki.com/wiki/Modding_Tutorials",
     "!settingupcs": "http://rimworldwiki.com/wiki/Modding_Tutorials/Setting_up_a_solution",
     "!patchoperations": "http://rimworldwiki.com/wiki/Modding_Tutorials/PatchOperations",
@@ -50,6 +49,7 @@
     "!ted": "`!ted` is a command, but no one can decide what it should say.",
     "!steve": "https://cdn.discordapp.com/attachments/326892498096095233/1106651578783514674/7lkcq0.jpg",
     "!penguin": "https://media.discordapp.net/attachments/326892498096095233/1143326748897984653/image.png",
+    "!binary": "comand borkd",
     "!workspace": "Consider loading the entire `Rimworld` folder into a workspace so you can search through all Defs at once, both vanilla and locally modded. Notepad++, VS Code, or any other modern IDE can do this. Example shown is in VS Code. https://cdn.discordapp.com/attachments/326892498096095233/1105722523519295569/Animation20.gif",
     "!chatgpt": "Programs such as ChatGPT are language processors and not true AI; they will confidently spew nonsense that only a true expert can tell from fiction, thus they are strongly discouraged when you are trying to learn a new technical skill such as coding or mod-making as they can make it harder to learn how to do things correctly.",
     "!sequence": "Try to avoid using `PatchOperationSequence` because it can obfuscate errors and make it difficult to figure out what's wrong. You only need it if you are sequencing multiple patches off of a PatchOperationFindMod or PatchOperationConditional, and in the former case if you have enough patches you should consider using LoadFolders.xml instead. Please see https://rimworldwiki.com/wiki/Modding_Tutorials/PatchOperations for more information.",
