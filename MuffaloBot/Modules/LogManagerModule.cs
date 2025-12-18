@@ -165,5 +165,10 @@ namespace MuffaloBot.Modules
             }
             return embedBuilder;
         }
+
+        public override void Dispose()
+        {
+
+        } // I honestly don't know wtf this is, but it must be implemented
     }
 }

@@ -6,8 +6,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using DSharpPlus;
+using DSharpPlus.AsyncEvents;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.EventArgs;
 using Microsoft.Extensions.Logging;
 using MuffaloBot.Converters;
 
@@ -15,7 +18,9 @@ namespace MuffaloBot
 {
     class Program
     {
+        CancellationTokenSource cancellationToken = new CancellationTokenSource();
         public DiscordClient client;
+        public bool killProgram = false;
         public CommandsNextExtension commandsNext;
         static Program _i;
         public static Program instance
@@ -72,11 +77,18 @@ namespace MuffaloBot
         public async Task StartAsync()
         {
             await client.ConnectAsync();
-            await Task.Delay(-1);
+            await Task.Delay(-1, cancellationToken.Token);
+            
         }
         static void Main(string[] args)
         {
             Program.instance.StartAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            Program.instance.client.Zombied += KillProgram;
+        }
+        public static Task KillProgram(DiscordClient client, ZombiedEventArgs e)
+        {
+            instance.cancellationToken.Cancel();
+            return null;
         }
     }
 }

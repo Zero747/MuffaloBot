@@ -126,7 +126,7 @@ namespace MuffaloBot.Commands
                 await ctx.RespondAsync("Image format not recognised.");
                 return;
             }
-            int originalWidth = image[0].Width, originalHeight = image[0].Height;
+            uint originalWidth = image[0].Width, originalHeight = image[0].Height;
             if (originalHeight * originalWidth > 1000000)
             {
                 await ctx.RespondAsync($"Gif exceeds maximum size of 1000000 pixels (Actual size: {originalHeight * originalWidth})");
@@ -158,11 +158,11 @@ namespace MuffaloBot.Commands
                 {
                     if (rescale > 2f)
                     {
-                        frame.AdaptiveResize((int)(frame.Width / rescale), (int)(frame.Height / rescale));
+                        frame.AdaptiveResize((uint)(frame.Width / rescale), (uint)(frame.Height / rescale));
                     }
                     else
                     {
-                        frame.Resize((int)(frame.Width / rescale), (int)(frame.Height / rescale));
+                        frame.Resize((uint)(frame.Width / rescale), (uint)(frame.Height / rescale));
                     }
                 }
                 DoMagic(mode, frame, originalWidth, originalHeight);
@@ -174,7 +174,7 @@ namespace MuffaloBot.Commands
                 image.Write(stream);
                 stream.Seek(0, SeekOrigin.Begin);
                 await new DiscordMessageBuilder()
-                    .WithFiles(new Dictionary<string, Stream>() { { "magic.gif", stream } })
+                    .AddFiles(new Dictionary<string, Stream>() { { "magic.gif", stream } })
                     .SendAsync(ctx.Channel);
             }
         }
@@ -190,7 +190,7 @@ namespace MuffaloBot.Commands
                 await ctx.RespondAsync("Image format not recognised.");
                 return;
             }
-            int originalWidth = image.Width, originalHeight = image.Height;
+            uint originalWidth = image.Width, originalHeight = image.Height;
             if (originalHeight * originalWidth > 2250000)
             {
                 await ctx.RespondAsync($"Image exceeds maximum size of 2250000 pixels (Actual size: {originalHeight * originalWidth})");
@@ -207,11 +207,11 @@ namespace MuffaloBot.Commands
             {
                 if (rescale < 0.5f)
                 {
-                    image.AdaptiveResize((int)(image.Width * rescale), (int)(image.Height * rescale));
+                    image.AdaptiveResize((uint)(image.Width * rescale), (uint)(image.Height * rescale));
                 }
                 else
                 {
-                    image.Resize((int)(image.Width * rescale), (int)(image.Height * rescale));
+                    image.Resize((uint)(image.Width * rescale), (uint)(image.Height * rescale));
                 }
             }
             DoMagic(mode, image, originalWidth, originalHeight);
@@ -229,19 +229,19 @@ namespace MuffaloBot.Commands
                 if (mode == ImageEditMode.JPEG || mode == ImageEditMode.MoreJPEG || mode == ImageEditMode.MostJPEG)
                 {
                     await new DiscordMessageBuilder()
-                    .WithFiles(new Dictionary<string, Stream>() { { "magic.jpeg", stream } })
+                    .AddFiles(new Dictionary<string, Stream>() { { "magic.jpeg", stream } })
                     .SendAsync(ctx.Channel);
                 }
                 else
                 {
                     await new DiscordMessageBuilder()
-                    .WithFiles(new Dictionary<string, Stream>() { { "magic.png", stream } })
+                    .AddFiles(new Dictionary<string, Stream>() { { "magic.png", stream } })
                     .SendAsync(ctx.Channel);
                 }
             }
         }
 
-        void DoMagic(ImageEditMode mode, IMagickImage image, int originalWidth, int originalHeight)
+        void DoMagic(ImageEditMode mode, IMagickImage image, uint originalWidth, uint originalHeight)
         {
             switch (mode)
             {

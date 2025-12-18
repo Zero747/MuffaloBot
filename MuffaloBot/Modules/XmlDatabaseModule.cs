@@ -65,5 +65,10 @@ namespace MuffaloBot.Modules
         {
             Client = client;
         }
+
+        public override void Dispose()
+        {
+
+        } // I honestly don't know wtf this is, but it must be implemented
     }
 }

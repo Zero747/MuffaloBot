@@ -290,6 +290,10 @@ namespace MuffaloBot.Modules
                 }
             }
         }
+        public override void Dispose()
+        {
+
+        } // I honestly don't know wtf this is, but it must be implemented
     }
 #endif
 }
